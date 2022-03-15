@@ -977,7 +977,21 @@ static int isPacked(int[ ] a){
         }
         return isValid && atleast > 0 ? 1 : 0;
     }
-
+static int getExponent(int n, int p){
+        if(p<=1) return -1;
+        if(n<0) n=-n;int index=0;
+        for(int i=0;i<n;i++){
+            int res=1;
+            for(int j=0;j<i;j++){
+                res*=p;
+            };
+            if(res>n) break;
+            if(n%res==0) {
+                index=i;
+            }
+        }
+        return index;
+    }
 public static void main(String[] args){
    System.out.print(isPacked(new int []{1,2,2,2,4,4,4,4,3,3,3}));
  }
