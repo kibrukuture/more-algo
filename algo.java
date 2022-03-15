@@ -959,6 +959,25 @@ static int isPacked(int[ ] a){
          Arr.isAllPositive(a)
          ) ? 1:0;
 }
+    static int isOddHeavy(int[] a) {
+        boolean isValid = true; int atleast = 0;int currOdd;
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] % 2 != 0) {
+                atleast++;
+                for (int j = 0; j < a.length; j++) {
+                    if (i != j && a[j] % 2 == 0) {
+                        if (a[i] < a[j]) {
+                            isValid = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+        return isValid && atleast > 0 ? 1 : 0;
+    }
+
 public static void main(String[] args){
    System.out.print(isPacked(new int []{1,2,2,2,4,4,4,4,3,3,3}));
  }
