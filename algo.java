@@ -875,6 +875,90 @@ System.out.println(Arr.packed(a));
 
     return 1;
 }
+    
+static int isPacked(int[ ] a){
+    class Arr{
+        static boolean isAllPositive(int []a){
+            boolean isvalid=true;
+            for(int i=0;i<a.length;i++)
+                if(a[i]<0){
+                    isvalid=false;
+                    break;
+                }
+            return isvalid;
+        }
+        static boolean isInConsecutiveLoc(int[]a){
+            boolean valid=true;int counter=0;
+            for(int i=0;i<a.length;i++){
+                if(i==0){
+                    counter++;
+                    continue;
+                }
+                if(a[i-1]!=a[i]){
+                    counter++;
+                }
+            }
+            int [] cons=new int[counter];counter=0;
+            for(int i=0;i<a.length;i++){
+                if(i==0){
+                    cons[counter]=a[i];
+                    counter++;
+                    continue;
+                }
+                if(a[i-1]!=a[i]){
+                    cons[counter]=a[i];
+                    counter++;
+                }
+            }
+            for(int i=0;i<cons.length;i++){
+                for(int j=0;j<cons.length;j++){
+                    if(i==j) continue;
+                    if(cons[i]==cons[j]){
+                        valid=false;
+                        break;
+                    }
+
+                }
+            }
+            return valid;
+        }
+        static boolean packed(int []a){
+            int counter=0; boolean valid=true;
+            for(int i=0;i<a.length;i++){
+                if(i==0){
+                    ++counter;
+                    if(a.length==1){
+                        if(counter!=a[i]){
+                            valid=false;
+                        }
+                    }
+                    continue;
+                }
+                if(a[i]!=a[i-1]){
+                    if(counter!=a[i-1]){
+                        valid=false;
+                        break;
+                    }
+                    counter=1;
+                    if(counter!=a[i] && i==a.length-1){
+                        valid=false;
+                    }
+                }else{
+                    ++counter;
+                    if(counter!=a[i] && i==a.length-1){
+                        valid=false;
+                    }
+                }
+            }
+            return valid;
+        }
+    }
+ return (
+         Arr.isInConsecutiveLoc(a) &&
+         Arr.packed(a) &&
+         Arr.isAllPositive(a)
+         ) ? 1:0;
+}
 public static void main(String[] args){
    System.out.print(isPacked(new int []{1,2,2,2,4,4,4,4,3,3,3}));
  }
